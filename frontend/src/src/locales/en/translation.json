@@ -1,0 +1,59 @@
+{
+  "common": {
+    "title": "Assessment",
+    "messages": {
+      "success": "Success"
+    }
+  },
+  "login": {
+    "title": "Login",
+    "labels": {
+      "email": "Email",
+      "password": "Password"
+    },
+    "buttons": {
+      "signIn": "Sign In",
+      "signUp": "Sign Up",
+      "logout": "Logout"
+    }
+  },
+  "phoneNumbers": {
+    "title": "Phone Numbers",
+    "columns": {
+      "phoneNumber": "Phone Number",
+      "price": "Price"
+    },
+    "buttons": {
+      "buy": "Buy"
+    },
+    "buyModal": {
+      "title": "Buy phone number"
+    }
+  },
+  "menu": {
+    "home": "Home",
+    "phoneNumbers": "Phone Numbers"
+  },
+  "payment": {
+    "buttons":{
+      "pay": "Pay",
+      "return": "Return to payment details"
+    },
+    "messages": {
+      "success": "Payment successful",
+      "failure": "Payment failed"
+    }
+  },
+  "cart": {
+    "modal": {
+      "title": "Cart",
+      "buttons": {
+        "goToPayment": "Go to payment"
+      },
+      "price": "Price",
+      "product": "Product",
+      "total": "Total"
+    },
+    "added": "Added to cart"
+  }
+}
