@@ -22,7 +22,7 @@ type Meta {
   currentPage: Int!
 }
 
-type List {
+type NumberList {
   items: [Number!]!
   meta: Meta!
 }
@@ -47,10 +47,29 @@ type Payment {
   items: [PaymentItem!]!
 }
 
+type Car {
+  id: Int!
+  make: String!
+  model: String!
+  price: Int!
+}
+
+type CarList {
+  items: [Car!]!
+  meta: Meta!
+}
+
 type Query {
   getMe: User!
-  findAll(limit: Int!, page: Int!): List!
+  findAll(limit: Int!, page: Int!): NumberList!
   getPayment(id: String!): Payment!
+  findAllCars(input: CarFindAll!): CarList!
+}
+
+input CarFindAll {
+  limit: Float
+  page: Float
+  text: String
 }
 
 type Mutation {
