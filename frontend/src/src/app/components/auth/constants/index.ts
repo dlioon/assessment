@@ -5,4 +5,5 @@ export enum PaymentAction {
   LOGIN = '/login',
   NUMBERS = '/numbers',
   PAYMENT = '/payment',
+  CARS = '/cars',
 }

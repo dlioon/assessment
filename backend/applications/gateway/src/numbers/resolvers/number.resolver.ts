@@ -3,16 +3,16 @@ import { Resolver, Query, Args, Int, Mutation } from '@nestjs/graphql';
 import { Auth } from '../../auth/decorators/auth.decorator';
 
 import { NumberService } from '../services/number.service';
-import { List } from '../entities/list.entity';
 import { Number } from '../entities/number.entity';
 import { NumberAction } from '../constants/number.constants';
+import { NumberList } from '../entities/list.entity';
 
-@Resolver(() => List)
+@Resolver(() => NumberList)
 export class NumberResolver {
   constructor(private readonly numberService: NumberService) {}
 
   @Auth()
-  @Query(() => List)
+  @Query(() => NumberList)
   findAll(
     @Args('limit', { type: () => Int }) limit: number,
     @Args('page', { type: () => Int }) page: number,
