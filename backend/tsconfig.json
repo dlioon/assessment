@@ -19,12 +19,12 @@
     "noFallthroughCasesInSwitch": false,
     "strict": true,
     "paths": {
-//      "@app/payment": [
-//        "applications/payments/src"
-//      ],
-//      "@app/payment/*": [
-//        "applications/payments/src/*"
-//      ]
+      "@app/elasticsearch": [
+        "libs/elasticsearch/src"
+      ],
+      "@app/elasticsearch/*": [
+        "libs/elasticsearch/src/*"
+      ]
     }
   }
 }

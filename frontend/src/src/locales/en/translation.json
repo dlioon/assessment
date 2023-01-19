@@ -32,7 +32,8 @@
   },
   "menu": {
     "home": "Home",
-    "phoneNumbers": "Phone Numbers"
+    "phoneNumbers": "Phone Numbers",
+    "cars": "Cars"
   },
   "payment": {
     "buttons":{
@@ -55,5 +56,14 @@
       "total": "Total"
     },
     "added": "Added to cart"
+  },
+  "cars": {
+    "title": "Cars",
+    "columns": {
+      "make": "Make",
+      "model": "Model",
+      "price": "Price"
+    },
+    "search": "Search"
   }
 }
