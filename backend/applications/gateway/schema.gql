@@ -1,0 +1,66 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type User {
+  uid: String!
+  email: String!
+}
+
+type Number {
+  id: Int!
+  number: Float!
+  price: Int!
+  status: String!
+}
+
+type Meta {
+  totalItems: Int!
+  itemCount: Int!
+  itemsPerPage: Int!
+  totalPage: Int!
+  currentPage: Int!
+}
+
+type List {
+  items: [Number!]!
+  meta: Meta!
+}
+
+type PaymentIntent {
+  id: String!
+  object: String!
+  amount: Int!
+  client_secret: String!
+  status: String!
+}
+
+type PaymentItem {
+  id: Int!
+  type: String!
+}
+
+type Payment {
+  _id: String!
+  status: String!
+  paymentId: String!
+  items: [PaymentItem!]!
+}
+
+type Query {
+  getMe: User!
+  findAll(limit: Int!, page: Int!): List!
+  getPayment(id: String!): Payment!
+}
+
+type Mutation {
+  register(email: String!, password: String!): User!
+  changeStatus(id: Int!, status: String!): Number!
+  createPaymentIntent(amount: Int!, currency: String!): PaymentIntent!
+  createPayment(paymentId: String!, amount: Int!, items: [PaymentItemInput!]!): Payment!
+}
+
+input PaymentItemInput {
+  id: Int!
+  type: String!
+}
