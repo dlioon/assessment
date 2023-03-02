@@ -1,5 +1,11 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import {
+  IsNotEmpty,
+  IsNumber,
+  IsString,
+  IsArray,
+  ArrayMinSize,
+} from 'class-validator';
 
 export class SellNumberDto {
   @ApiProperty()
@@ -14,6 +20,8 @@ export class SellNumberDto {
 
   @ApiProperty()
   @IsNotEmpty()
+  @IsArray()
+  @ArrayMinSize(1)
   @IsNumber({}, { each: true })
   numberIds: number[];
 }

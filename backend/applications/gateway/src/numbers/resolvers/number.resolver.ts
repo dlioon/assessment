@@ -3,8 +3,8 @@ import { Resolver, Query, Args, Int, Mutation } from '@nestjs/graphql';
 import { Auth } from '../../auth/decorators/auth.decorator';
 
 import { NumberService } from '../services/number.service';
-import { List } from '../entities/list.entity';
-import { Number } from '../entities/number.entity';
+import { List } from '../entities/list.graphql.entity';
+import { Number } from '../entities/number.graphql.entity';
 import { NumberAction } from '../constants/number.constants';
 
 @Resolver(() => List)

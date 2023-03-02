@@ -4,21 +4,18 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
 
 import { UserService } from './services/user.service';
 import { UserResolver } from './resolvers/user.resolver';
-import { USER_SERVICE_NAME } from './constants/user.constants';
+import { USER_CONFIG, USER_SERVICE_NAME } from './constants/user.constants';
+import { userConfig } from './config/user.config';
 
 @Module({
   imports: [
+    ConfigModule.forFeature(userConfig),
     ClientsModule.registerAsync([
       {
         imports: [ConfigModule],
         name: USER_SERVICE_NAME,
-        useFactory: async (config: ConfigService) => ({
-          transport: Transport.TCP,
-          options: {
-            host: config.get<string>('MODULE_USERS_HOST'),
-            port: config.get<number>('MODULE_USERS_PORT'),
-          },
-        }),
+        useFactory: async (configService: ConfigService) =>
+          configService.get(USER_CONFIG),
         inject: [ConfigService],
       },
     ]),

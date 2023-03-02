@@ -1,8 +1,10 @@
 import { NestFactory } from '@nestjs/core';
 import { Transport } from '@nestjs/microservices';
+import { ValidationPipe } from '@nestjs/common';
+
+import { RpcExceptionFilter } from '@app/common-errors';
 
 import { AppModule } from './app/app.module';
-import { RpcExceptionFilter } from './utils/exception-filters/rpc.filter';
 
 async function bootstrap() {
   const app = await NestFactory.createMicroservice(AppModule, {
@@ -11,6 +13,7 @@ async function bootstrap() {
       port: process.env.PORT,
     },
   });
+  app.useGlobalPipes(new ValidationPipe());
   app.useGlobalFilters(new RpcExceptionFilter());
 
   await app.listen();

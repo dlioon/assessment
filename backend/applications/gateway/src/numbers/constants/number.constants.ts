@@ -1,5 +1,6 @@
 export const NUMBER_SERVICE_NAME = 'NUMBER_SERVICE';
 
+export const NUMBER_CONFIG = 'number';
 export enum NumberRoute {
   NUMBER = 'number',
 }

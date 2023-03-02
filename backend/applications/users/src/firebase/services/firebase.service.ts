@@ -20,7 +20,7 @@ export class FirebaseService {
         password,
       });
     } catch (error: any) {
-      throw new FirebaseException(error.errorInfo);
+      throw new FirebaseException(error);
     }
   }
 
@@ -28,7 +28,7 @@ export class FirebaseService {
     try {
       return await this.client.auth().verifyIdToken(token);
     } catch (error: any) {
-      throw new FirebaseException(error.errorInfo);
+      throw new FirebaseException(error);
     }
   }
 
@@ -36,7 +36,7 @@ export class FirebaseService {
     try {
       return await this.client.auth().getUser(uid);
     } catch (error: any) {
-      throw new FirebaseException(error.errorInfo);
+      throw new FirebaseException(error);
     }
   }
 }

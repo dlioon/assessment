@@ -19,6 +19,10 @@
     "noFallthroughCasesInSwitch": false,
     "strict": true,
     "paths": {
+      "@app/common-errors": ["libs/common-errors/src"],
+      "@app/common-errors/*": ["libs/common-errors/src/*"],
+      "@app/command": ["libs/command/src"],
+      "@app/command/*": ["libs/command/src/*"],
 //      "@app/payment": [
 //        "applications/payments/src"
 //      ],

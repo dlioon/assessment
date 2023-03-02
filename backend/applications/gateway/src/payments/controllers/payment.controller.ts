@@ -14,7 +14,7 @@ import { PaymentService } from '../services/payment.service';
 export class PaymentController {
   constructor(public readonly paymentService: PaymentService) {}
 
-  @Post('/webhook/stripe')
+  @Post('/webhooks/stripe')
   @HttpCode(200)
   async webhook(
     @Headers('stripe-signature') stripeSignature: string,

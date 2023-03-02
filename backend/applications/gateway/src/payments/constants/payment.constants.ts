@@ -1,5 +1,7 @@
 export const PAYMENT_SERVICE_NAME = 'PAYMENT_SERVICE';
 
+export const PAYMENT_CONFIG = 'payment';
+
 export enum PaymentRoute {
   PAYMENT = 'payment',
 }

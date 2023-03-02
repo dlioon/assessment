@@ -1,8 +1,9 @@
 import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { CART } from '../constants';
+import { CartItem, CartState } from '../interfaces';
 
-const initialState = {
+const initialState: CartState = {
   entities: [],
   status: null,
 };
@@ -11,10 +12,10 @@ const cartSlice = createSlice({
   name: CART,
   initialState,
   reducers: {
-    itemAdded(state: any, action: any) {
+    itemAdded(state: CartState, action: PayloadAction<CartItem>) {
       const product = action.payload;
       const itemIndex = state.entities.findIndex(
-        (item: any) => item.id === product.id,
+        ({ id }: CartItem) => id === product.id,
       );
 
       if (itemIndex < 0) {
@@ -27,9 +28,9 @@ const cartSlice = createSlice({
         state.entities[itemIndex] = updatedItem;
       }
     },
-    itemRemoved(state: any, action: PayloadAction<number>) {
+    itemRemoved(state: CartState, action: PayloadAction<number>) {
       const itemIndex = state.entities.findIndex(
-        (item: any) => item.id === action.payload,
+        ({ id }: CartItem) => id === action.payload,
       );
 
       const updatedItem = {

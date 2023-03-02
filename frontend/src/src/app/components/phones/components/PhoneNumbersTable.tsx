@@ -19,6 +19,7 @@ import { CartContext } from 'app/components/cart/context';
 import { useChangeStatus, useNumbersList } from '../hooks/api';
 import { PER_PAGE } from '../constants';
 import { success } from '../../utils/snackbar';
+import { Number } from '../interfaces';
 
 export const PhoneNumbersTable = () => {
   const { t } = useTranslation();
@@ -70,7 +71,7 @@ export const PhoneNumbersTable = () => {
   );
 
   const handleBuy = useCallback(
-    (row: any) => async () => {
+    (row: Number) => async () => {
       addToCart({
         type: 'phoneNumber',
         price: row.price,

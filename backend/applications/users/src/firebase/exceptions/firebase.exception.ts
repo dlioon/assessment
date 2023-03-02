@@ -1,9 +1,7 @@
 import { HttpException, HttpStatus } from '@nestjs/common';
 
-import { ErrorType } from '../types/error.type';
-
 export class FirebaseException extends HttpException {
-  constructor(params: ErrorType) {
-    super(params, HttpStatus.BAD_REQUEST);
+  constructor(error) {
+    super(error.errorInfo, error.response.status ?? HttpStatus.BAD_REQUEST);
   }
 }

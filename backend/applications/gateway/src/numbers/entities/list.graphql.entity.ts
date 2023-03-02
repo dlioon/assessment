@@ -1,7 +1,7 @@
 import { ObjectType, Field } from '@nestjs/graphql';
 
-import { Number } from './number.entity';
-import { Meta } from './meta.entity';
+import { Number } from './number.graphql.entity';
+import { Meta } from './meta.graphql.entity';
 
 @ObjectType()
 export class List {

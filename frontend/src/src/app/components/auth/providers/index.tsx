@@ -13,7 +13,7 @@ import '../config/firebase';
 import { AuthContext } from '../context';
 import { AUTH_KEY } from '../constants';
 import { SignInResponse } from '../interfaces';
-import { useUserMeQuery } from '../hooks/api';
+import { useGetMe } from '../hooks/api';
 
 export interface Props {
   readonly children: ReactNode;
@@ -23,7 +23,7 @@ export const AuthProvider = ({ children }: Props) => {
   const [user, setUser] = useState<User>();
   const [isReady, setIsReady] = useState<boolean>(false);
 
-  useUserMeQuery({
+  useGetMe({
     onCompleted: ({ getMe: result }) => {
       setUser(result);
       setIsReady(true);
@@ -64,11 +64,11 @@ export const AuthProvider = ({ children }: Props) => {
       await signOutFirebase(getAuth());
       setUser(undefined);
       localStorage.removeItem(AUTH_KEY);
-      setIsReady(true);
     } catch (e: any) {
       error(e.message);
-      setIsReady(true);
       console.error(e);
+    } finally {
+      setIsReady(true);
     }
   }, [signOutFirebase, localStorage, getAuth]);
 

@@ -7,12 +7,13 @@ import {
   ModalTitle,
 } from 'app/components/Theme/components/Modal/components';
 import { Payment } from 'app/components/payments/components/Payment';
+import { CartItem } from '../../interfaces';
 
 export interface Props {
   onSubmit: (data: boolean, cancellationReason?: number) => Promise<void>;
   onClose: () => void;
   open: boolean;
-  cart: any;
+  cart: CartItem[];
 }
 
 export const CartModal = ({ onClose, open, cart }: Props) => {
@@ -21,7 +22,7 @@ export const CartModal = ({ onClose, open, cart }: Props) => {
   const [isPayment, setIsPayment] = useState<boolean>(false);
 
   const totalPrice = useMemo(
-    () => cart.reduce((acc: any, item: any) => (acc += item.price), 0),
+    () => cart.reduce((acc: number, item: CartItem) => (acc += item.price), 0),
     [cart],
   );
 
@@ -35,7 +36,7 @@ export const CartModal = ({ onClose, open, cart }: Props) => {
       {isPayment ? (
         <Payment
           price={totalPrice}
-          items={cart.map((item: any) => ({
+          items={cart.map((item: CartItem) => ({
             type: item.type,
             id: item.id,
           }))}

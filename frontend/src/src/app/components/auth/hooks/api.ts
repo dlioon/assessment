@@ -28,7 +28,7 @@ const CREATE_USER = gql`
   }
 `;
 
-export const useUserMeQuery = (options?: QueryHookOptions): QueryResult<User> =>
+export const useGetMe = (options?: QueryHookOptions): QueryResult<User> =>
   useQuery(GET_ME, options);
 
 export const useCreateUser = (): MutationTuple<

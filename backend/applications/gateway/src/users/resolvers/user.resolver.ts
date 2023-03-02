@@ -3,7 +3,7 @@ import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
 import { Auth } from '../../auth/decorators/auth.decorator';
 import { AuthUser } from '../../auth/decorators/auth-user.decorator';
 
-import { User } from '../entities/user.entity';
+import { User } from '../entities/user.graphql.entity';
 import { UserService } from '../services/user.service';
 import { UserAction } from '../constants/user.constants';
 

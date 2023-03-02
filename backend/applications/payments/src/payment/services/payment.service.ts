@@ -47,33 +47,4 @@ export class PaymentService {
   getPayment(id: string): Promise<Payment> {
     return this.paymentModel.findOne({ paymentId: id }).exec();
   }
-
-  async processStripeWebhook(data: StripeWebhookDto): Promise<Payment | null> {
-    const event: Stripe.Event = await this.stripeService.constructEvent(data);
-    let payment: Payment = null;
-
-    try {
-      switch (event.type) {
-        case StripeWebhookStatus.SUCCEEDED:
-          const paymentIntent: Partial<Payment & { id: string }> =
-            event.data.object;
-          payment = await this.createPayment({
-            amount: paymentIntent.amount,
-            status: paymentIntent.status,
-            paymentId: paymentIntent.id,
-          });
-          break;
-        case StripeWebhookStatus.FAILURE:
-          // TODO: handle error
-          break;
-        default:
-          console.log(`Unhandled event type ${event.type}`);
-      }
-    } catch (e: any) {
-      const message = `Error - ${e.message}. Event - ${JSON.stringify(event)}`;
-      console.error(message);
-    }
-
-    return payment;
-  }
 }

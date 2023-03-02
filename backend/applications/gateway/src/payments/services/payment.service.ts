@@ -1,8 +1,7 @@
-import { BadRequestException, Inject, Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
-import { firstValueFrom, lastValueFrom, map } from 'rxjs';
 
-import { RequestPatternType } from '../../app/types/request-pattern.type';
+import { CommandService } from '@app/command';
 
 import {
   PAYMENT_SERVICE_NAME,
@@ -14,39 +13,23 @@ import {
 import { NumberService } from '../../numbers/services/number.service';
 
 @Injectable()
-export class PaymentService {
+export class PaymentService extends CommandService<
+  PaymentRoute,
+  PaymentAction
+> {
   constructor(
     @Inject(PAYMENT_SERVICE_NAME) private readonly paymentService: ClientProxy,
     private readonly numberService: NumberService,
-  ) {}
-
-  async send(
-    {
-      module = PaymentRoute.PAYMENT,
-      cmd,
-    }: Partial<RequestPatternType<PaymentRoute, PaymentAction>>,
-    data,
   ) {
-    const { error, ...response } = await firstValueFrom(
-      this.paymentService.send(
-        {
-          module,
-          cmd,
-        },
-        data,
-      ),
-    );
-
-    if (error) {
-      throw new BadRequestException(error.message);
-    }
-
-    return response;
+    super(paymentService);
   }
 
   async processStripeWebhook(data, paymentObj) {
     const response = await this.send(
-      { cmd: PaymentAction.PROCESS_STRIPE_WEBHOOK },
+      {
+        module: PaymentRoute.PAYMENT,
+        cmd: PaymentAction.PROCESS_STRIPE_WEBHOOK,
+      },
       data,
     );
 

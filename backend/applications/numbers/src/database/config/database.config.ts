@@ -16,5 +16,4 @@ export const databaseConfig = registerAs(DATABASE_CONFIG, () => ({
   migrationsRun: true,
   autoLoadEntities: true,
   migrations: [path.resolve(__dirname, '../../**/migrations/*.{ts,js}')],
-  entities: [path.resolve(__dirname, '../../**/*.entity{.ts,.js}')],
 }));

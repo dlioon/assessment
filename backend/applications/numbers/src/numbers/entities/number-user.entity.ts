@@ -16,10 +16,10 @@ export class NumberUser {
   @Column({ type: 'int', nullable: false })
   numberId: number;
 
-  @Column({ type: 'varchar', nullable: false })
+  @Column({ type: 'varchar', nullable: false, length: 255 })
   userId: string;
 
-  @Column({ type: 'varchar', nullable: false })
+  @Column({ type: 'varchar', nullable: false, length: 255 })
   paymentId: string;
 
   @ManyToOne(() => Number, (number) => number.numberUsers)

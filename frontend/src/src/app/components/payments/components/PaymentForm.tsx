@@ -14,11 +14,12 @@ import { CartContext } from 'app/components/cart/context';
 
 import { useCreatePayment, usePayment } from '../hooks/api';
 import { StripeStatus } from '../constants';
+import { PaymentItem } from '../../cart/interfaces';
 
 export interface Props {
   clientSecret: string;
   price: number;
-  items: any;
+  items: PaymentItem[];
   paymentIntentId: string | null;
   updateSecret: () => Promise<void>;
 }
@@ -71,39 +72,41 @@ export const PaymentForm = ({
       const { paymentIntent } = await stripe.confirmPayment({
         elements,
         confirmParams: {
-          return_url: 'http://localhost:3000',
+          return_url: process.env.REACT_APP_STIPE_RETURN_URL,
         },
         redirect: 'if_required',
       });
-      if (paymentIntent) {
-        const interval = setInterval(async () => {
-          const response = await getPayment({
-            variables: {
-              id: paymentIntent.id,
-            },
-          });
-          const status = response.data.getPayment.status;
 
-          if (
-            status === StripeStatus.SUCCESS ||
-            status === StripeStatus.FAILURE
-          ) {
-            clearInterval(interval);
-            setIsLoading(false);
-          }
-          if (status === StripeStatus.SUCCESS) {
-            clearCart();
-            setIsSuccess(true);
-          }
-          if (status === StripeStatus.FAILURE) {
-            setIsFailure(true);
-          }
-        }, 1000);
-      } else {
-        setIsLoading(false);
+      if (!paymentIntent) {
+        return;
       }
+
+      const interval = setInterval(async () => {
+        const response = await getPayment({
+          variables: {
+            id: paymentIntent.id,
+          },
+        });
+        const status = response.data.getPayment.status;
+
+        if (
+          status === StripeStatus.SUCCESS ||
+          status === StripeStatus.FAILURE
+        ) {
+          clearInterval(interval);
+          setIsLoading(false);
+        }
+        if (status === StripeStatus.SUCCESS) {
+          clearCart();
+          setIsSuccess(true);
+        }
+        if (status === StripeStatus.FAILURE) {
+          setIsFailure(true);
+        }
+      }, 1000);
     } catch (e) {
       console.error(e);
+    } finally {
       setIsLoading(false);
     }
   }, [stripe, elements, clientSecret, getPayment, clearCart]);

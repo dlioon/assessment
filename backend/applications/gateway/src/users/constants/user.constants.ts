@@ -1,5 +1,7 @@
 export const USER_SERVICE_NAME = 'USER_SERVICE';
 
+export const USER_CONFIG = 'user';
+
 export enum UserRoute {
   AUTH = 'auth',
 }

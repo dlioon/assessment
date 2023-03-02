@@ -46,17 +46,12 @@ export class NumberService extends TransactionFor<NumberService> {
 
     await this.repo.save(numbers);
 
-    const userNumbers: Partial<NumberUser>[] = params.numberIds.reduce(
-      (acc: Partial<NumberUser>[], numberId: number) => {
-        acc.push({
-          numberId,
-          userId: params.userId,
-          paymentId: params.paymentId,
-        });
-
-        return acc;
-      },
-      [],
+    const userNumbers: Partial<NumberUser>[] = params.numberIds.map(
+      (numberId: number) => ({
+        numberId,
+        userId: params.userId,
+        paymentId: params.paymentId,
+      }),
     );
 
     return this.numberUserRepo.save(userNumbers);

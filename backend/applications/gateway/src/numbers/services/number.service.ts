@@ -1,41 +1,26 @@
 import { Injectable, Inject } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
-import { firstValueFrom, lastValueFrom, map } from 'rxjs';
+
+import { CommandService } from '@app/command';
 
 import {
   NUMBER_SERVICE_NAME,
   NumberAction,
   NumberRoute,
 } from '../constants/number.constants';
-import { RequestPatternType } from '../../app/types/request-pattern.type';
 
 @Injectable()
-export class NumberService {
+export class NumberService extends CommandService<NumberRoute, NumberAction> {
   constructor(
     @Inject(NUMBER_SERVICE_NAME) private readonly numberService: ClientProxy,
-  ) {}
-
-  send(
-    {
-      module = NumberRoute.NUMBER,
-      cmd,
-    }: Partial<RequestPatternType<NumberRoute, NumberAction>>,
-    data,
   ) {
-    return lastValueFrom(
-      this.numberService
-        .send(
-          {
-            module,
-            cmd,
-          },
-          data,
-        )
-        .pipe(map((resp) => resp)),
-    );
+    super(numberService);
   }
 
   sellNumber(data) {
-    return this.send({ cmd: NumberAction.SELL_NUMBER }, data);
+    return this.send(
+      { module: NumberRoute.NUMBER, cmd: NumberAction.SELL_NUMBER },
+      data,
+    );
   }
 }

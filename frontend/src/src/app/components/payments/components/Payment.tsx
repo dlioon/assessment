@@ -8,12 +8,13 @@ import { error } from 'app/components/utils/snackbar';
 
 import { PaymentForm } from './PaymentForm';
 import { useCreatePaymentIntent } from '../hooks/api';
+import { PaymentItem } from '../../cart/interfaces';
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_KEY ?? '');
 
 export interface Props {
   price: number;
-  items: any;
+  items: PaymentItem[];
   onClose: () => void;
 }
 

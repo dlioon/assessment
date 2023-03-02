@@ -19,4 +19,5 @@ export enum ProductType {
 export enum PaymentStatus {
   INIT = 'init',
   SUCCEEDED = 'succeeded',
+  FAILURE = 'failure',
 }

@@ -8,6 +8,24 @@
       "compilerOptions": {
         "tsConfigPath": "libs/payment/tsconfig.lib.json"
       }
+    },
+    "common-errors": {
+      "type": "library",
+      "root": "libs/common-errors",
+      "entryFile": "index",
+      "sourceRoot": "libs/common-errors/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/common-errors/tsconfig.lib.json"
+      }
+    },
+    "command": {
+      "type": "library",
+      "root": "libs/command",
+      "entryFile": "index",
+      "sourceRoot": "libs/command/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/command/tsconfig.lib.json"
+      }
     }
   },
   "compilerOptions": {

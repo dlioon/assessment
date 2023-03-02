@@ -10,9 +10,9 @@ import { Payment, PaymentSchema } from './entities/payment.entity';
 @Module({
   imports: [
     MongooseModule.forFeature([{ name: Payment.name, schema: PaymentSchema }]),
-    StripeModule,
   ],
   controllers: [PaymentController],
   providers: [PaymentService],
+  exports: [PaymentService],
 })
 export class PaymentModule {}

@@ -4,9 +4,9 @@ import { Auth } from '../../auth/decorators/auth.decorator';
 import { AuthUser } from '../../auth/decorators/auth-user.decorator';
 
 import { PaymentService } from '../services/payment.service';
-import { PaymentIntent } from '../entities/payment-intent.entity';
-import { Payment } from '../entities/payment.entity';
-import { PaymentItem } from '../entities/payment-item.entity';
+import { PaymentIntent } from '../entities/payment-intent.graphql.entity';
+import { Payment } from '../entities/payment.graphql.entity';
+import { PaymentItem } from '../entities/payment-item.graphql.entity';
 import { PaymentItemInput } from '../entities/payment-item-input.input';
 import { PaymentAction } from '../constants/payment.constants';
 
