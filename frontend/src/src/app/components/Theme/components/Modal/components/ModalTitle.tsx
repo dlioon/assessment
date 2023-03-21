@@ -7,7 +7,7 @@ import { SxProps, Theme, IconButton } from '@mui/material';
 import { styles } from '../styles';
 
 interface Props extends DialogTitleProps {
-  onClose?: () => void;
+  onClose?: (event: React.MouseEvent<HTMLElement>) => void;
   children?: React.ReactNode;
   content?: boolean;
   childStyles?: any;

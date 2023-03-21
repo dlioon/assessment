@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import { Box } from '@mui/material';
@@ -15,7 +15,7 @@ const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_KEY ?? '');
 export interface Props {
   price: number;
   items: PaymentItem[];
-  onClose: () => void;
+  onClose: (event: React.MouseEvent<HTMLElement>) => void;
 }
 
 export const Payment = ({ price, items, onClose }: Props) => {
@@ -36,7 +36,7 @@ export const Payment = ({ price, items, onClose }: Props) => {
     } catch (e: any) {
       console.error(e);
       error(e.message);
-      onClose();
+      onClose(e);
     }
   }, [createPaymentIntent, price]);
 

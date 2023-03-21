@@ -4,9 +4,9 @@ import { useModal as useModalHook } from 'react-modal-hook';
 import { Loader } from '../../Loader';
 import { ModalProps } from '../types';
 
-export interface Props {
-  readonly onSubmit?: (...rest: any) => void;
-  readonly onClose?: () => void;
+export interface Props<T> {
+  readonly onSubmit?: (params: T) => void;
+  readonly onClose?: (event: React.MouseEvent<HTMLElement>) => void;
   readonly Modal: React.FC<ModalProps>;
   readonly props?: object;
   readonly unmount?: boolean;
@@ -14,7 +14,7 @@ export interface Props {
   readonly closeOnSubmit?: boolean;
 }
 
-export const useModal = ({
+export const useModal = <T,>({
   onSubmit = () => {},
   onClose = () => {},
   Modal,
@@ -22,20 +22,20 @@ export const useModal = ({
   unmount = false,
   isSupportShowProps = true,
   closeOnSubmit = true,
-}: Props): [(props?: any) => void, () => void] => {
+}: Props<T>) => {
   const [showProps, setShowProps] = useState<Record<string, any>>({});
 
   const [showModal, hideModal] = useModalHook(() => {
     const [isLoading, setIsLoading] = useState(false);
 
     const handleSubmit = useCallback(
-      async (...rest: any) => {
+      async (params: T) => {
         try {
           if (closeOnSubmit) setIsLoading(true);
 
           const submit = showProps.onSubmit || onSubmit;
 
-          await submit(...rest, showProps);
+          await submit(params, showProps);
           if (closeOnSubmit) {
             hideModal();
           }

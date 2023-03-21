@@ -8,7 +8,7 @@ import {
 
 export interface Props {
   onSubmit: (data: boolean, cancellationReason?: number) => Promise<void>;
-  onClose: () => void;
+  onClose: (event: React.MouseEvent<HTMLElement>) => void;
   open: boolean;
   price: number;
   items: any;
