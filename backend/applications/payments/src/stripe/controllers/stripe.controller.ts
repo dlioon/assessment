@@ -1,4 +1,4 @@
-import { Controller } from '@nestjs/common';
+import { Body, Controller, UseInterceptors } from '@nestjs/common';
 import { MessagePattern } from '@nestjs/microservices';
 import Stripe from 'stripe';
 
@@ -8,8 +8,8 @@ import {
   PaymentAction,
 } from '../../payment/constants/payment.constants';
 import { CreatePaymentIntentDto } from '../../payment/dtos/create-payment-intent.dto';
-import { StripeWebhookDto } from '../../payment/dtos/stripe-webhook.dto';
 import { Payment } from '../../payment/entities/payment.entity';
+import { EventInterceptor } from '../interceptors/event.interceptor';
 
 @Controller()
 export class StripeController {
@@ -24,11 +24,15 @@ export class StripeController {
   ): Promise<Stripe.Response<Stripe.PaymentIntent>> {
     return this.stripeService.createPaymentIntent(data);
   }
+
   @MessagePattern({
     module: PAYMENT_ROUTE,
     cmd: PaymentAction.PROCESS_STRIPE_WEBHOOK,
   })
-  processStripeWebhook(data: StripeWebhookDto): Promise<Payment | null> {
-    return this.stripeService.processStripeWebhook(data);
+  @UseInterceptors(EventInterceptor)
+  processStripeWebhook(
+    @Body('event') event: Stripe.Event,
+  ): Promise<Payment | null> {
+    return this.stripeService.processStripeWebhook(event);
   }
 }
