@@ -19,16 +19,16 @@
     "noFallthroughCasesInSwitch": false,
     "strict": true,
     "paths": {
+      "@app/elasticsearch": [
+        "libs/elasticsearch/src"
+      ],
+      "@app/elasticsearch/*": [
+        "libs/elasticsearch/src/*"
+      ],
       "@app/common-errors": ["libs/common-errors/src"],
       "@app/common-errors/*": ["libs/common-errors/src/*"],
       "@app/command": ["libs/command/src"],
-      "@app/command/*": ["libs/command/src/*"],
-//      "@app/payment": [
-//        "applications/payments/src"
-//      ],
-//      "@app/payment/*": [
-//        "applications/payments/src/*"
-//      ]
+      "@app/command/*": ["libs/command/src/*"]
     }
   }
 }

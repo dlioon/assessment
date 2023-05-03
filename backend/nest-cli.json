@@ -1,12 +1,27 @@
 {
+  "collection": "@nestjs/schematics",
+  "sourceRoot": "apps/applications/src",
+  "monorepo": true,
+  "root": "applications/gateway",
+  "compilerOptions": {
+    "webpack": true,
+    "deleteOutDir": true,
+    "tsConfigPath": "tsconfig.json",
+    "assets": [
+      "*.env",
+      "*.env.test",
+      "**/*.hbs",
+      "i18n/locales/**/*"
+    ]
+  },
   "projects": {
-    "payment": {
+    "elasticsearch": {
       "type": "library",
-      "root": "libs/payment",
+      "root": "libs/elasticsearch",
       "entryFile": "index",
-      "sourceRoot": "libs/payment/src",
+      "sourceRoot": "libs/elasticsearch/src",
       "compilerOptions": {
-        "tsConfigPath": "libs/payment/tsconfig.lib.json"
+        "tsConfigPath": "libs/elasticsearch/tsconfig.lib.json"
       }
     },
     "common-errors": {
@@ -27,8 +42,5 @@
         "tsConfigPath": "libs/command/tsconfig.lib.json"
       }
     }
-  },
-  "compilerOptions": {
-    "webpack": true
   }
 }

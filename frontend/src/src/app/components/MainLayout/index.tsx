@@ -72,6 +72,11 @@ export const MainLayout = ({ children }: Props) => {
         to: PaymentAction.NUMBERS,
         active: matchPath(PaymentAction.NUMBERS, pathname),
       },
+      {
+        name: t('menu.cars'),
+        to: PaymentAction.CARS,
+        active: matchPath(PaymentAction.CARS, pathname),
+      },
     ];
   }, [pathname, isAuthorized]);
 

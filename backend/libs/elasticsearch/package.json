@@ -1,0 +1,17 @@
+{
+  "name": "@api/elasticsearch",
+  "private": true,
+  "version": "0.0.1",
+  "scripts": {
+    "prebuild": "rimraf dist",
+    "build": "nest build -p tsconfig.lib.json",
+    "start": "nest start",
+    "start:dev": "nest start --watch"
+  },
+  "dependencies": {
+    "@elastic/elasticsearch": "^8.6.0",
+    "@nestjs/elasticsearch": "^9.0.0"
+  },
+  "devDependencies": {
+  }
+}
