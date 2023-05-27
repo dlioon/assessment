@@ -1,8 +1,7 @@
 import { ObjectType, Field } from '@nestjs/graphql';
 
-import { Meta } from '../../common/entities/meta.entity';
-
 import { Car } from './car.entity';
+import { Meta } from './meta.graphql.entity';
 
 @ObjectType()
 export class CarList {

@@ -6,7 +6,14 @@ import { CarModule } from '../cars/car.module';
 import { DatabaseModule } from '../database/database.module';
 
 @Module({
-  imports: [ConfigModule.forRoot(), DatabaseModule, CarModule, CommandModule],
+  imports: [
+    ConfigModule.forRoot({
+      envFilePath: './applications/cars/.env',
+    }),
+    DatabaseModule,
+    CarModule,
+    CommandModule,
+  ],
   controllers: [],
   providers: [],
 })

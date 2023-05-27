@@ -5,7 +5,13 @@ import { FirebaseModule } from '../firebase/firebase.module';
 import { AuthModule } from '../auth/auth.module';
 
 @Module({
-  imports: [ConfigModule.forRoot(), AuthModule, FirebaseModule],
+  imports: [
+    ConfigModule.forRoot({
+      envFilePath: './applications/users/.env',
+    }),
+    AuthModule,
+    FirebaseModule,
+  ],
   controllers: [],
   providers: [],
 })

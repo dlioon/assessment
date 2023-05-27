@@ -1,20 +1,59 @@
 {
+  "$schema": "https://json.schemastore.org/nest-cli",
   "collection": "@nestjs/schematics",
-  "sourceRoot": "apps/applications/src",
+  "sourceRoot": "applications/gateway/src",
   "monorepo": true,
   "root": "applications/gateway",
   "compilerOptions": {
     "webpack": true,
-    "deleteOutDir": true,
-    "tsConfigPath": "tsconfig.json",
-    "assets": [
-      "*.env",
-      "*.env.test",
-      "**/*.hbs",
-      "i18n/locales/**/*"
-    ]
+    "tsConfigPath": "applications/gateway/tsconfig.json"
   },
   "projects": {
+    "gateway": {
+      "type": "application",
+      "root": "applications/gateway",
+      "entryFile": "main",
+      "sourceRoot": "applications/gateway/src",
+      "compilerOptions": {
+        "tsConfigPath": "applications/gateway/tsconfig.json"
+      }
+    },
+    "cars": {
+      "type": "application",
+      "root": "applications/cars",
+      "entryFile": "main",
+      "sourceRoot": "applications/cars/src",
+      "compilerOptions": {
+        "tsConfigPath": "applications/cars/tsconfig.json"
+      }
+    },
+    "numbers": {
+      "type": "application",
+      "root": "applications/numbers",
+      "entryFile": "main",
+      "sourceRoot": "applications/numbers/src",
+      "compilerOptions": {
+        "tsConfigPath": "applications/numbers/tsconfig.json"
+      }
+    },
+    "payments": {
+      "type": "application",
+      "root": "applications/payments",
+      "entryFile": "main",
+      "sourceRoot": "applications/payments/src",
+      "compilerOptions": {
+        "tsConfigPath": "applications/payments/tsconfig.json"
+      }
+    },
+    "users": {
+      "type": "application",
+      "root": "applications/users",
+      "entryFile": "main",
+      "sourceRoot": "applications/users/src",
+      "compilerOptions": {
+        "tsConfigPath": "applications/users/tsconfig.json"
+      }
+    },
     "elasticsearch": {
       "type": "library",
       "root": "libs/elasticsearch",

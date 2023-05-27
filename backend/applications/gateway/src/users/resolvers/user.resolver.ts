@@ -5,7 +5,7 @@ import { AuthUser } from '../../auth/decorators/auth-user.decorator';
 
 import { User } from '../entities/user.graphql.entity';
 import { UserService } from '../services/user.service';
-import { UserAction } from '../constants/user.constants';
+import { UserAction, UserRoute } from '../constants/user.constants';
 
 @Resolver(() => User)
 export class UserResolver {
@@ -23,7 +23,7 @@ export class UserResolver {
     @Args('password') password: string,
   ): Promise<User> {
     return this.userService.send(
-      { cmd: UserAction.REGISTER },
+      { module: UserRoute.AUTH, cmd: UserAction.REGISTER },
       {
         email,
         password,

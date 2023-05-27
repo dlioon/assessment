@@ -3,16 +3,16 @@
   "private": true,
   "workspaces": [
     "applications/*",
-    "libraries/*"
+    "libs/*"
   ],
   "devDependencies": {
-    "lerna": "^5.5.1",
     "@typescript-eslint/eslint-plugin": "^5.37.0",
     "@typescript-eslint/parser": "^5.37.0",
     "eslint": "^8.23.1",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
     "jest": "^29.0.3",
+    "lerna": "^5.5.1",
     "prettier": "^2.7.1",
     "source-map-support": "^0.5.21",
     "ts-jest": "^29.0.0",
@@ -25,6 +25,10 @@
     "lerna:bootstrap": "lerna bootstrap",
     "lerna:createPackage": "lerna create",
     "lerna:addPackageDependency": "lerna add $npm_config_name --scope=$npm_config_scope",
-    "start:gateway:dev": "lerna bootstrap && npm run --prefix ./applications/gateway start"
+    "start:gateway:dev": "nest start gateway --watch",
+    "start:cars:dev": "nest start cars --watch",
+    "start:numbers:dev": "nest start numbers --watch",
+    "start:payments:dev": "nest start payments --watch",
+    "start:users:dev": "nest start users --watch"
   }
 }

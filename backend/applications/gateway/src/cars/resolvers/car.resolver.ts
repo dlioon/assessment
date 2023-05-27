@@ -1,9 +1,9 @@
-import { Resolver, Query, Args } from '@nestjs/graphql';
+import { Args, Query, Resolver } from '@nestjs/graphql';
 
 import { Auth } from '../../auth/decorators/auth.decorator';
 
 import { CarService } from '../services/car.service';
-import { CarAction } from '../constants/car.constants';
+import { CarAction, CarRoute } from '../constants/car.constants';
 import { CarList } from '../entities/list.entity';
 import { CarFindAllInput } from '../input/find-all.input';
 
@@ -14,6 +14,9 @@ export class CarResolver {
   @Auth()
   @Query(() => CarList)
   findAllCars(@Args('input') input: CarFindAllInput) {
-    return this.carService.send({ cmd: CarAction.FIND_ALL }, input);
+    return this.carService.send(
+      { module: CarRoute.CAR, cmd: CarAction.FIND_ALL },
+      input,
+    );
   }
 }

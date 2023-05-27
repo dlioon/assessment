@@ -1,8 +1,10 @@
 import { Command } from 'nestjs-command';
+import { Injectable, Logger } from '@nestjs/common';
 
 import { CarService } from '../services/car.service';
 import { Commands } from '../constants/car.constants';
-import { Injectable } from '@nestjs/common';
+import { CarElasticsearchService } from '../services/car-elasticsearch.service';
+import { ChunkErrorType } from '../types/chunk-error.type';
 
 interface BasicCommandOptions {
   string?: string;
@@ -12,19 +14,29 @@ interface BasicCommandOptions {
 
 @Injectable()
 export class IndexCarsCommand {
-  constructor(private readonly carService: CarService) {}
+  private readonly logger = new Logger(IndexCarsCommand.name);
+  constructor(
+    private readonly carService: CarService,
+    private readonly carElasticsearchService: CarElasticsearchService,
+  ) {}
 
   @Command({ command: Commands.INDEX_CARS })
   async run(): Promise<void> {
     // await this.carService.deleteIndex();
-    await this.carService.createIndex();
+    await this.carElasticsearchService.createIndex();
 
     for (let i = 0; i < 100; i++) {
-      const cars = await this.carService.findMany({
+      const cars = await this.carService.find({
         skip: i * 100,
         take: 100,
       });
-      await Promise.all(cars.map((car) => this.carService.indexCar(car)));
+
+      const errors: ChunkErrorType[] =
+        await this.carElasticsearchService.indexCars(cars);
+
+      if (errors.length) {
+        this.logger.error(errors);
+      }
     }
   }
 }

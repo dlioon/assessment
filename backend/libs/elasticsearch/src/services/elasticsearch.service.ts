@@ -1,6 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { ElasticsearchService as NestElasticsearchService } from '@nestjs/elasticsearch';
 import {
+  BulkRequest,
+  BulkResponse,
   IndexRequest,
   IndexResponse,
   IndicesCreateRequest,
@@ -29,5 +31,9 @@ export class ElasticsearchService {
 
   search<T>(params: SearchRequest): Promise<SearchResponse<T>> {
     return this.elasticService.search<T>(params);
+  }
+
+  bulk<T>(params: BulkRequest): Promise<BulkResponse> {
+    return this.elasticService.bulk(params);
   }
 }

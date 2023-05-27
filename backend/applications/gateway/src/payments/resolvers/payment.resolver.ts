@@ -8,7 +8,7 @@ import { PaymentIntent } from '../entities/payment-intent.graphql.entity';
 import { Payment } from '../entities/payment.graphql.entity';
 import { PaymentItem } from '../entities/payment-item.graphql.entity';
 import { PaymentItemInput } from '../entities/payment-item-input.input';
-import { PaymentAction } from '../constants/payment.constants';
+import { PaymentAction, PaymentRoute } from '../constants/payment.constants';
 
 @Resolver()
 export class PaymentResolver {
@@ -21,7 +21,10 @@ export class PaymentResolver {
     @Args('currency', { type: () => String }) currency: string,
   ) {
     return this.paymentService.send(
-      { cmd: PaymentAction.CREATE_PAYMENT_INTENT },
+      {
+        module: PaymentRoute.PAYMENT,
+        cmd: PaymentAction.CREATE_PAYMENT_INTENT,
+      },
       {
         amount,
         currency,
@@ -38,7 +41,7 @@ export class PaymentResolver {
     @AuthUser() user,
   ) {
     return this.paymentService.send(
-      { cmd: PaymentAction.CREATE_PAYMENT },
+      { module: PaymentRoute.PAYMENT, cmd: PaymentAction.CREATE_PAYMENT },
       {
         paymentId,
         amount,
@@ -51,6 +54,9 @@ export class PaymentResolver {
   @Auth()
   @Query(() => Payment)
   getPayment(@Args('id', { type: () => String }) id: string) {
-    return this.paymentService.send({ cmd: PaymentAction.GET_PAYMENT }, { id });
+    return this.paymentService.send(
+      { module: PaymentRoute.PAYMENT, cmd: PaymentAction.GET_PAYMENT },
+      { id },
+    );
   }
 }

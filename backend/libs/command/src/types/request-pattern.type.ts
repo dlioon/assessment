@@ -1,5 +1,5 @@
 export type RequestPatternType<ModuleType, ModuleActions> = {
-  module: ModuleType;
+  module?: ModuleType;
 
   cmd: ModuleActions;
 };

@@ -1,13 +1,13 @@
 import { ObjectType, Field } from '@nestjs/graphql';
 
 import { Number } from './number.graphql.entity';
-import { Meta } from './meta.graphql.entity';
+import { CarsMeta } from './cars-meta.graphql.entity';
 
 @ObjectType()
 export class List {
   @Field(() => [Number])
   items: Number[];
 
-  @Field(() => Meta)
-  meta: Meta;
+  @Field(() => CarsMeta)
+  meta: CarsMeta;
 }

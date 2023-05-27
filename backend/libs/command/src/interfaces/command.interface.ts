@@ -1,4 +1,4 @@
-import { RequestPatternType } from '@app/command/types/request-pattern.type';
+import { RequestPatternType } from '../types/request-pattern.type';
 
 export interface ICommand<ModuleType, ModuleActions> {
   send(

@@ -1,12 +1,4 @@
-version: '3.8'
-
-x-logging:
-  - &logging
-    logging:
-      options:
-        max-size: '20m'
-        max-file: '5'
-      driver: json-file
+version: '3.3'
 
 services:
   postgres:

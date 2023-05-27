@@ -7,7 +7,9 @@ import { DatabaseModule } from '../database/database.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot({
+      envFilePath: './applications/payments/.env',
+    }),
     DatabaseModule,
     PaymentModule,
     StripeModule,

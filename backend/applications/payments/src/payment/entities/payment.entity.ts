@@ -11,7 +11,7 @@ export class Payment {
   @Prop()
   amount: number;
 
-  @Prop()
+  @Prop({ type: String })
   status: PaymentStatus;
 
   @Prop()

@@ -5,7 +5,13 @@ import { NumberModule } from '../numbers/number.module';
 import { DatabaseModule } from '../database/database.module';
 
 @Module({
-  imports: [ConfigModule.forRoot(), DatabaseModule, NumberModule],
+  imports: [
+    ConfigModule.forRoot({
+      envFilePath: './applications/numbers/.env',
+    }),
+    DatabaseModule,
+    NumberModule,
+  ],
   controllers: [],
   providers: [],
 })

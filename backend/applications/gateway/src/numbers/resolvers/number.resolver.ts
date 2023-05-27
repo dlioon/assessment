@@ -1,11 +1,11 @@
-import { Resolver, Query, Args, Int, Mutation } from '@nestjs/graphql';
+import { Args, Int, Mutation, Query, Resolver } from '@nestjs/graphql';
 
 import { Auth } from '../../auth/decorators/auth.decorator';
 
 import { NumberService } from '../services/number.service';
 import { List } from '../entities/list.graphql.entity';
 import { Number } from '../entities/number.graphql.entity';
-import { NumberAction } from '../constants/number.constants';
+import { NumberAction, NumberRoute } from '../constants/number.constants';
 
 @Resolver(() => List)
 export class NumberResolver {
@@ -18,7 +18,7 @@ export class NumberResolver {
     @Args('page', { type: () => Int }) page: number,
   ) {
     return this.numberService.send(
-      { cmd: NumberAction.FIND_ALL },
+      { module: NumberRoute.NUMBER, cmd: NumberAction.FIND_ALL },
       { limit, page },
     );
   }
@@ -29,6 +29,9 @@ export class NumberResolver {
     @Args('id', { type: () => Int }) id: number,
     @Args('status', { type: () => String }) status: string,
   ) {
-    return this.numberService.send({ cmd: NumberAction.SAVE }, { id, status });
+    return this.numberService.send(
+      { module: NumberRoute.NUMBER, cmd: NumberAction.SAVE },
+      { id, status },
+    );
   }
 }
